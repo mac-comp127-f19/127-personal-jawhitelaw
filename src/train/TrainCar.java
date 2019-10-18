@@ -1,0 +1,73 @@
+package train;
+
+import comp127graphics.Ellipse;
+import comp127graphics.GraphicsGroup;
+import comp127graphics.Line;
+import comp127graphics.Rectangle;
+
+import java.awt.*;
+
+public abstract class TrainCar extends GraphicsGroup {
+
+    public static final int SCALE = 1;
+
+    /* Radius of the wheels on each car */
+    public static final double WHEEL_RADIUS = 8*SCALE;
+    /* Dimensions of the frame of a train car */
+    public static final double CAR_WIDTH = 75*SCALE;
+    public static final double CAR_HEIGHT = 36*SCALE;
+
+    /* Distance from the bottom of a train car to the track below it */
+    public static final double CAR_BASELINE = 10*SCALE;
+
+    /* Width of the connector, which overlaps between successive cars */
+    public static final double CONNECTOR = 6*SCALE;
+
+    /* Distance from the edge of the frame to the center of the wheel */
+    public static final double WHEEL_INSET = 16*SCALE;
+
+    private Color color;
+
+    public TrainCar(Color color){
+        super();
+        this.color=color;
+        drawCarFrame();
+    }
+
+    /* Draws a wheel centered at (x, y) */
+    public void drawWheel(double x, double y) {
+        double r = WHEEL_RADIUS;
+        Ellipse wheel = new Ellipse(x - r, y - r, 2 * r, 2 * r);
+        wheel.setFilled(true);
+        wheel.setFillColor(Color.GRAY);
+        this.add(wheel);
+    }
+
+    /* Draws the common part of a train car */
+    public void drawCarFrame() {
+        double x=0;
+        double y=this.getCarHeight();
+        double x0 = x + CONNECTOR;
+        double y0 = y - CAR_BASELINE;
+        double top = y0 - CAR_HEIGHT;
+        this.add(new Line(x, y0, x + CAR_WIDTH + 2 * CONNECTOR, y0));
+        drawWheel(x0 + WHEEL_INSET, y - WHEEL_RADIUS);
+        drawWheel(x0 + CAR_WIDTH - WHEEL_INSET, y - WHEEL_RADIUS);
+        comp127graphics.Rectangle r = new Rectangle(x0, top, CAR_WIDTH, CAR_HEIGHT);
+        r.setFilled(true);
+        r.setFillColor(color);
+        this.add(r);
+    }
+
+    public double getCarHeight(){
+        return CAR_HEIGHT;
+    }
+
+    public double getCarWidth(){
+        return CAR_WIDTH;
+    }
+
+    public double getConnectorLength(){
+        return CONNECTOR;
+    }
+}
