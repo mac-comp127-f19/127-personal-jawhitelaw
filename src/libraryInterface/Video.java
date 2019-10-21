@@ -14,6 +14,7 @@ public class Video implements Media {
     }
 
     @Override
+    // precondition: currentCopies>0
     public boolean checkOut() {
         if(currentCopies>0){
             currentCopies--;
@@ -23,6 +24,7 @@ public class Video implements Media {
     }
 
     @Override
+    // precondition: currentCopies<numCopies
     public boolean checkIn() {
         if(currentCopies<numCopies){
             currentCopies++;
@@ -37,6 +39,7 @@ public class Video implements Media {
     }
 
     @Override
+    // title != null
     public String getTitle(){
         return title;
     }
