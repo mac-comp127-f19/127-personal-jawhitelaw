@@ -60,6 +60,9 @@ public class GraphingCalculator {
                     getAnimationParameter() + event.getDelta().getX() / width);
             isAnimating = false;
             animationSpeed = animationSpeed+event.getDelta().getX()/(width*2);
+            if (event.getModifiers().contains(ModifierKey.SHIFT)){
+
+            }
         });
 
         canvas.onMouseUp(event -> {
