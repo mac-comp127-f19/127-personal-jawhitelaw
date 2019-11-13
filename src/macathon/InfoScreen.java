@@ -6,17 +6,19 @@ import comp127graphics.ui.Button;
 import comp127graphics.ui.TextField;
 import marsh.inheritance2.B;
 
+import java.awt.*;
+
 
 public class InfoScreen extends GraphicsGroup {
 
     PersonInfo personInfo;
     private TextField username, age, weight, height;
-    private Button male, female;
+    private Button male, female, submitButton;
     private GraphicsText appTitle, sexLabel, usernameLabel, ageLabel, weightLabel, heightLabel;
 
     public InfoScreen(PersonInfo personInfo){
         appTitle = new GraphicsText();
-        appTitle.setText("App Title");
+        appTitle.setText("BeerHive");
         appTitle.setFontSize(100);
         this.add(appTitle, 100,100);
 
@@ -40,7 +42,7 @@ public class InfoScreen extends GraphicsGroup {
         this.add(age, 200, 250);
 
         weightLabel = new GraphicsText();
-        weightLabel.setText("Weight:");
+        weightLabel.setText("Weight (in pounds):");
         this.add(weightLabel, 200, 300);
 
         weight = new TextField();
@@ -51,7 +53,7 @@ public class InfoScreen extends GraphicsGroup {
         this.add(weight, 200, 300);
 
         heightLabel = new GraphicsText();
-        heightLabel.setText("Height:");
+        heightLabel.setText("Height (in inches):");
         this.add(heightLabel, 200, 350);
 
         height = new TextField();
@@ -72,5 +74,12 @@ public class InfoScreen extends GraphicsGroup {
         female = new Button("female");
         female.onClick(() -> personInfo.setSex(false));
         this.add(female, 275, 400);
+
+        submitButton = new Button("Submit");
+        this.add(submitButton, 200, 450);
+    }
+
+    public Button getSubmitButton(){
+        return submitButton;
     }
 }
